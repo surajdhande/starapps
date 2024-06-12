@@ -1,0 +1,235 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Umbrella Customizer</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+            background-color: #E0FBE2;
+        }
+
+        .customizer {
+            width: 100%;
+            display: flex;
+            justify-content: center;
+            gap: 100px;
+        }
+
+        .umbrella-view {
+            position: relative;
+            width: 600px;
+            height: 600px;
+        }
+
+        h1 {
+            font-size: 48px;
+        }
+
+        .custom-text {
+            font-size: 24px;
+            text-align: left;
+            font-weight: bold;
+            margin: 10px 0;
+        }
+
+        .normal-text {
+            font-size: 18px;
+            margin: 5px 0 20px 0;
+        }
+
+        .note-text {
+            font-size: 12px;
+            margin-bottom: 10px;
+        }
+
+        .upload-btn {
+            background-color: blue;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            cursor: pointer;
+            margin-top: 10px;
+            display: flex;
+            gap: 10px;
+            align-items: center;
+            font-size: 20px;
+            text-transform: uppercase;
+            font-weight: bold;
+            width: 100%;
+            gap: 80px;
+            position: relative;
+        }
+
+        .upload_icon, .loader_icon {
+            fill: white;
+        }
+
+        .loader_icon {
+            display: none;
+            animation: rotate 3s linear infinite;
+        }
+
+        @keyframes rotate {
+            0% {
+                transform: rotate(0deg);
+            }
+            50% {
+                transform: rotate(180deg);
+            }
+            60% {
+                transform: rotate(180deg);
+            }
+            100% {
+                transform: rotate(360deg);
+            }
+        }
+
+        #umbrella {
+            width: 100%;
+            height: auto;
+        }
+
+        #brand-logo {
+            position: absolute;
+            bottom: 20%;
+            left: 50%;
+            transform: translateX(-50%);
+            max-width: 100px;
+            max-height: 80px;
+        }
+
+        .controls {
+            display: flex;
+            flex-direction: column;
+            align-items: left;
+            align-self: center;
+        }
+
+        .color-swatches {
+            margin: 20px;
+        }
+
+        .swatch {
+            width: 30px;
+            height: 30px;
+            border: none;
+            border-radius: 50%;
+            margin: 0 5px;
+            cursor: pointer;
+        }
+
+        #logo-upload {
+            display: none;
+        }
+
+        .upload-container {
+            position: relative;
+        }
+
+        .upload-container input[type="file"] {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            opacity: 0;
+            cursor: pointer;
+        }
+    </style>
+</head>
+<body>
+    <div class="customizer">
+        <div class="umbrella-view">
+            <img id="umbrella" src="blue-umbrella.png" alt="Umbrella">
+            <img id="umbrella-loader" class="loader_icon" src="loader_icon_blue.svg" alt="loader" style="height:300px;margin:auto;height:center"/>
+            <img id="brand-logo" src="" alt="">
+        </div>
+        <div class="controls">
+            <h1>Custom Umbrella</h1>
+            <div class="color-swatches">
+                <button class="swatch" data-color="blue" style="background-color: blue;"></button>
+                <button class="swatch" data-color="pink" style="background-color: pink;"></button>
+                <button class="swatch" data-color="yellow" style="background-color: yellow;"></button>
+            </div>
+            <div class="custom-text">Customize your umbrella</div>
+            <div class="normal-text">Upload a logo for an instant preview</div>
+            <div class="note-text">.png and .jpg file only. Max file size 5MB</div>
+            <div class="upload-container">
+                <button id="upload-btn" class="upload-btn">
+                    <img class="upload_icon" src="upload_icon.svg" alt="upload"/>
+                    <!-- <img class="loader_icon" src="loader_icon.svg" alt="loader"/> -->
+                    <svg aria-hidden="true" class="loader_icon" focusable="false" role="presentation" viewBox="0 0 28.3 31.2" width="28.3" height="31.2" version="1.1" xmlns="http://www.w3.org/2000/svg"><path d="M25.1 23.6c-.3.1-.6.2-1 .2-.6.1-1.3 0-2.1.1s-1.7.3-2.6.8c-.8.5-1.4 1.1-1.9 1.6-.7.9-1.1 1.7-1.5 2.2-.2.3-.4.4-.7.6-.2.1-.4.2-.8.2v-13L26 22.9c-.3.3-.6.5-.9.7m-11.3 5.9c-.5-.1-.8-.2-1-.4-.2-.2-.5-.4-.7-.7-.3-.5-.7-1.1-1.2-1.7-.5-.7-1.1-1.3-2.1-1.9-.8-.5-1.6-.7-2.3-.8-1.1-.2-2-.1-2.7-.2l-.9-.3c-.2-.1-.4-.3-.6-.6l11.4-6.6v13.2zM1.7 21.3c0-.3.1-.6.2-1 .2-.5.6-1.1.9-1.9.3-.8.6-1.7.6-2.8v-.1c0-1.5-.6-2.6-1-3.5l-.6-1.2c-.1-.4-.2-.7-.2-1 0-.3.1-.6.2-1l11.4 6.6-11.3 6.8c-.1-.4-.2-.7-.2-.9M3.2 7.6c.3-.1.6-.2 1-.2.6-.1 1.3 0 2.1-.1.7-.2 1.6-.4 2.5-.9.8-.5 1.4-1.1 1.9-1.6.7-.9 1.1-1.7 1.5-2.2.2-.3.4-.4.7-.6.2-.1.5-.2.8-.2V15L2.3 8.3c.3-.4.6-.6.9-.7m11.3-5.9c.5 0 .8.2 1 .4.2.2.5.4.7.7.3.5.7 1.1 1.2 1.7.5.7 1.1 1.3 2.1 1.9.8.5 1.6.7 2.4.8 1.1.1 2 .1 2.7.2l.9.3c.2.1.4.3.6.6l-11.4 6.6V1.7zm12.1 8.2c0 .3-.1.6-.2 1-.2.5-.6 1.1-.9 1.9-.3.8-.6 1.7-.6 2.8v.2c0 1.5.5 2.6 1 3.5l.6 1.2c.1.4.2.7.2 1 0 .3-.1.6-.2.9l-11.4-6.6L26.3 9c.2.4.3.7.3.9m.4 7.8c-.3-.6-.5-1.3-.5-2v-.1c0-1 .4-1.8.8-2.7.2-.4.5-.8.6-1.3.2-.5.3-1 .3-1.6 0-.7-.2-1.4-.6-2.1-.5-.8-1.1-1.4-1.8-1.7-.5-.2-1-.3-1.5-.4-.7-.1-1.4-.1-2.1-.1-.7-.1-1.3-.2-1.9-.6-.6-.3-1-.7-1.4-1.2-.5-.9-.9-1.7-1.6-2.5-.3-.4-.7-.8-1.3-1-.5-.3-1.1-.4-1.9-.4-1 0-1.8.2-2.4.7-.5.3-.8.7-1.1 1.1-.4.6-.7 1.2-1.1 1.7-.4.5-.8 1-1.5 1.4-.6.4-1.2.5-1.8.6-.9.1-1.8 0-2.8.2-.5.1-1 .3-1.5.7-.5.3-.9.8-1.3 1.4C.2 8.5 0 9.3 0 10c0 .6.1 1.1.3 1.6.3.7.7 1.3 1 2 .3.6.5 1.3.5 2.1v.1c0 1.1-.4 1.8-.8 2.7-.2.4-.5.8-.6 1.3-.2.5-.3 1-.3 1.6 0 .7.2 1.4.6 2.1.5.8 1.1 1.4 1.8 1.7.5.2 1 .3 1.5.4.7.1 1.4.1 2.1.1.7.1 1.3.2 2 .6.6.3 1 .7 1.4 1.2.5.7.9 1.5 1.6 2.3.3.4.7.7 1.3 1 .5.3 1.2.4 1.9.4 1 0 1.8-.3 2.4-.7.5-.3.8-.7 1.1-1.1.4-.6.8-1.2 1.2-1.7.4-.5.8-1 1.5-1.4.6-.3 1.1-.5 1.7-.6.9-.1 1.8 0 2.8-.2.5-.1 1-.3 1.5-.6s.9-.8 1.3-1.4c.4-.7.6-1.5.6-2.1 0-.6-.1-1.1-.3-1.6-.5-.9-.8-1.5-1.1-2.1"></path></svg>
+
+                    Upload Logo
+                </button>
+                <input type="file" id="logo-upload">
+            </div>
+        </div>
+    </div>
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+            const umbrella = document.getElementById('umbrella');
+            const brandLogo = document.getElementById('brand-logo');
+            const colorSwatches = document.querySelectorAll('.swatch');
+            const logoUpload = document.getElementById('logo-upload');
+            const uploadBtn = document.getElementById('upload-btn');
+            const uploadIcons = document.querySelectorAll('.upload_icon');
+            const loaderIcons = document.querySelectorAll('.loader_icon');
+            const umbrellaLoader = document.getElementById('umbrella-loader');
+            
+            function showLoader(color) {
+                uploadIcons.forEach(icon => icon.style.display = 'none');
+                loaderIcons.forEach(icon => icon.style.display = 'block');
+                umbrella.style.display = 'none';
+                brandLogo.style.display="none";
+
+                setTimeout(() => {
+                    loaderIcons.forEach(icon => icon.style.display = 'none');
+                    uploadIcons.forEach(icon => icon.style.display = 'block');
+                    umbrella.style.display = 'block';
+                    brandLogo.style.display="block";
+                }, 5000);
+            }
+
+            colorSwatches.forEach(swatch => {
+                swatch.addEventListener('click', function () {
+                    const color = this.getAttribute('data-color');
+                    umbrella.src = `${color}-umbrella.png`;
+                    umbrellaLoader.src = `loader_icon.svg`;
+                    uploadBtn.style.backgroundColor = color;
+                    showLoader(color);
+                });
+            });
+
+            logoUpload.addEventListener('change', function (event) {
+                const file = event.target.files[0];
+                const reader = new FileReader();
+
+                reader.onload = function (e) {
+                    brandLogo.src = e.target.result;
+                };
+
+                if (file) {
+                    const selectedColor = uploadBtn.style.backgroundColor;
+                    const color = selectedColor === "rgb(255, 0, 0)" ? "red" : selectedColor === "rgb(255, 192, 203)" ? "pink" : "yellow";
+                    umbrellaLoader.src = `loader_icon.svg`;
+                    showLoader(color);
+                    reader.readAsDataURL(file);
+                }
+            });
+
+            // Trigger file input when upload button is clicked
+            uploadBtn.addEventListener('click', function () {
+                logoUpload.click();
+            });
+        });
+    </script>
+</body>
+</html>
